@@ -10,15 +10,15 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: Recipe;
-  id: number;
+  public recipe: Recipe;
+  public id: number;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -28,16 +28,16 @@ export class RecipeDetailComponent implements OnInit {
       );
   }
 
-  onAddToShoppingList() {
+  public onAddToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
-  onEditRecipe() {
+  public onEditRecipe() {
     this.router.navigate(['edit'], {relativeTo: this.route});
     // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 
-  onDeleteRecipe() {
+  public onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['/recipes']);
   }

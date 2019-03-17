@@ -14,12 +14,12 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSignIn(form: NgForm){
+  public onSignIn(form: NgForm): void {
     const email = form.value.email;
     const password = form.value.password;
     this.authservice.signinUser(email, password);
-    //const token = this.authservice.getToken()
-    //console.log(token)
+    // const token = this.authservice.getToken()
+    // console.log(token)
   }
 
 }

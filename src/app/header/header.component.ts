@@ -13,7 +13,7 @@ export class HeaderComponent {
     private dataStorageService: DataStorageService,
     private authService: AuthService) {}
 
-  onSaveData() {
+  public onSaveData(): void {
     this.dataStorageService.storeRecipes()
       .subscribe(
         (response: Response) => {
@@ -22,11 +22,15 @@ export class HeaderComponent {
       );
   }
 
-  onFetchData() {
+  public onFetchData(): void {
     this.dataStorageService.getRecipes();
   }
 
-  onLogout(){
+  public onLogout(): void {
     this.authService.logout();
+  }
+
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }

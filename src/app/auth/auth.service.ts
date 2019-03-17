@@ -6,50 +6,50 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  token: string;
+  private token: string;
 
   constructor( private router: Router) { }
 
-  signupUser(email: string, password: string){
+  public signupUser(email: string, password: string): void {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(
         data => console.log(data)
       )
       .catch(
-        error=> console.log(error)
-      )
+        error => console.log(error)
+      );
   }
 
-  signinUser(email: string, password: string){
+  public signinUser(email: string, password: string): void {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
           firebase.auth().currentUser.getIdToken()
             .then(
-              (token:string) => this.token = token
-            )
+              (token: string) => this.token = token
+            );
 
         }
       )
       .catch(
-        error=> console.log(error)
-      )
+        error => console.log(error)
+      );
   }
 
-  getToken() {
+  public getToken(): string {
     firebase.auth().currentUser.getIdToken()
     .then(
-      (token:string) => this.token = token
+      (token: string) => this.token = token
     );
-    return this.token
+    return this.token;
   }
 
-  isAuthenticated(){
+  public isAuthenticated(): boolean {
     return this.token != null;
   }
 
-  logout() {
+  public logout(): void {
     firebase.auth().signOut();
     this.token = null;
   }
